@@ -1,0 +1,23 @@
+{
+  "name": "todo-app-pure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "scss": "node-sass -w scss -o css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/H02c4n/todo-app-pure.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/H02c4n/todo-app-pure/issues"
+  },
+  "homepage": "https://github.com/H02c4n/todo-app-pure#readme",
+  "dependencies": {
+    "node-sass": "^7.0.3"
+  }
+}

@@ -1,0 +1,9 @@
+body {
+  background-color: #EC7272; }
+
+#priority {
+  width: 80px !important;
+  text-align: center; }
+
+#done-list .todo-text {
+  text-decoration: line-through; }

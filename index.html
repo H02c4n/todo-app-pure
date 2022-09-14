@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <title>Todo-app pure-JS</title>
+  </head>
+  <body>
+    <div class="container mt-3">
+      <h1 class="fw-4 text-white text-center">
+        Todo App with <i class="fa-brands fa-js"></i>
+      </h1>
+
+      <section class="mx-auto mt-4" id="inputSection">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Create a new todo..."
+                aria-label="Recipient's username with two button addons"
+              />
+              <input
+                type="radio"
+                class="btn-check"
+                name="options"
+                id="high"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-danger text-light" for="high"
+                >High</label
+              >
+              <input
+                type="radio"
+                class="btn-check"
+                name="options"
+                id="middle"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-warning text-light" for="middle"
+                >Middle</label
+              ><input
+                type="radio"
+                class="btn-check"
+                name="options"
+                id="low"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-info text-light" for="low"
+                >Low</label
+              >
+
+              <button class="btn btn-success" type="button">Add</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--I WILL DO-->
+      <section class="mx-auto mt-4" id="todo-list">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <h2 class="display-6 text-light mx-auto">I WILL DO</h2>
+            <ul class="list-group d-flex">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center fs-4"
+              >
+                <span class="todo-text"
+                  ><input class="me-3" type="checkbox" name="done" id="" /> A
+                  first item</span
+                >
+                <span class="badge text-bg-danger"> 2022/09/15</span>
+                <span class="btn btn-danger text-light">X</span>
+              </li>
+
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center fs-4"
+              >
+                <span class="todo-text"
+                  ><input class="me-3" type="checkbox" name="done" id="" /> A
+                  second item</span
+                >
+                <span class="badge text-bg-warning"> 2022/09/15</span>
+
+                <span class="btn btn-danger text-light">X</span>
+              </li>
+
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center fs-4"
+              >
+                <span class="todo-text"
+                  ><input class="me-3" type="checkbox" name="done" id="" /> A
+                  third item</span
+                >
+                <span class="badge text-bg-info"> 2022/09/15</span>
+
+                <span class="btn btn-danger text-light">X</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!--I HAVE DONE-->
+
+      <section class="mx-auto mt-4" id="todo-list">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <h2 class="display-6 text-light mx-auto">I HAVE DONE</h2>
+            <ul id="done-list" class="list-group d-flex">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center fs-4"
+              >
+                <span class="todo-text"
+                  ><input
+                    class="me-3"
+                    type="checkbox"
+                    checked
+                    name="done"
+                    id=""
+                  />
+                  A first item</span
+                >
+                <span class="badge text-bg-secondary"> 2022/09/15</span>
+                <span class="btn btn-danger text-light">X</span>
+              </li>
+
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center fs-4"
+              >
+                <span class="todo-text"
+                  ><input
+                    class="me-3"
+                    type="checkbox"
+                    checked
+                    name="done"
+                    id=""
+                  />
+                  A second item</span
+                >
+                <span class="badge text-bg-secondary"> 2022/09/15</span>
+
+                <span class="btn btn-danger text-light">X</span>
+              </li>
+
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center fs-4"
+              >
+                <span class="todo-text"
+                  ><input
+                    class="me-3"
+                    type="checkbox"
+                    checked
+                    name="done"
+                    id=""
+                  />
+                  A third item</span
+                >
+                <span class="badge text-bg-secondary"> 2022/09/15</span>
+
+                <span class="btn btn-danger text-light">X</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js"></script>
+  </body>
+</html>
