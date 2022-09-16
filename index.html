@@ -32,6 +32,7 @@
           <div class="col-md-8 offset-md-2">
             <div class="input-group">
               <input
+                id="input-text"
                 type="text"
                 class="form-control"
                 placeholder="Create a new todo..."
@@ -41,6 +42,7 @@
                 type="radio"
                 class="btn-check"
                 name="options"
+                value="high"
                 id="high"
                 autocomplete="off"
               />
@@ -51,6 +53,7 @@
                 type="radio"
                 class="btn-check"
                 name="options"
+                value="middle"
                 id="middle"
                 autocomplete="off"
               />
@@ -60,6 +63,7 @@
                 type="radio"
                 class="btn-check"
                 name="options"
+                value="low"
                 id="low"
                 autocomplete="off"
               />
@@ -67,64 +71,35 @@
                 >Low</label
               >
 
-              <button class="btn btn-success" type="button">Add</button>
+              <button id="add-btn" class="btn btn-success" type="button">
+                Add
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       <!--I WILL DO-->
-      <section class="mx-auto mt-4" id="todo-list">
+      <section class="mx-auto mt-4" id="section-will">
         <div class="row">
           <div class="col-md-8 offset-md-2">
             <h2 class="display-6 text-light mx-auto">I WILL DO</h2>
-            <ul class="list-group d-flex">
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center fs-4"
-              >
-                <span class="todo-text"
-                  ><input class="me-3" type="checkbox" name="done" id="" /> A
-                  first item</span
-                >
-                <span class="badge text-bg-danger"> 2022/09/15</span>
-                <span class="btn btn-danger text-light">X</span>
-              </li>
-
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center fs-4"
-              >
-                <span class="todo-text"
-                  ><input class="me-3" type="checkbox" name="done" id="" /> A
-                  second item</span
-                >
-                <span class="badge text-bg-warning"> 2022/09/15</span>
-
-                <span class="btn btn-danger text-light">X</span>
-              </li>
-
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center fs-4"
-              >
-                <span class="todo-text"
-                  ><input class="me-3" type="checkbox" name="done" id="" /> A
-                  third item</span
-                >
-                <span class="badge text-bg-info"> 2022/09/15</span>
-
-                <span class="btn btn-danger text-light">X</span>
-              </li>
-            </ul>
+            <ul id="todo-list-will" class="list-group d-flex"></ul>
+            <small
+              id="num-of-active"
+              class="d-flex text-light fs-5 justify-content-end mt-2"
+            ></small>
           </div>
         </div>
       </section>
 
       <!--I HAVE DONE-->
 
-      <section class="mx-auto mt-4" id="todo-list">
+      <section class="mx-auto mt-4" id="section-done">
         <div class="row">
           <div class="col-md-8 offset-md-2">
             <h2 class="display-6 text-light mx-auto">I HAVE DONE</h2>
-            <ul id="done-list" class="list-group d-flex">
+            <ul id="todo-list-done" class="list-group d-flex">
               <li
                 class="list-group-item d-flex justify-content-between align-items-center fs-4"
               >
@@ -141,43 +116,12 @@
                 <span class="badge text-bg-secondary"> 2022/09/15</span>
                 <span class="btn btn-danger text-light">X</span>
               </li>
-
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center fs-4"
-              >
-                <span class="todo-text"
-                  ><input
-                    class="me-3"
-                    type="checkbox"
-                    checked
-                    name="done"
-                    id=""
-                  />
-                  A second item</span
-                >
-                <span class="badge text-bg-secondary"> 2022/09/15</span>
-
-                <span class="btn btn-danger text-light">X</span>
-              </li>
-
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center fs-4"
-              >
-                <span class="todo-text"
-                  ><input
-                    class="me-3"
-                    type="checkbox"
-                    checked
-                    name="done"
-                    id=""
-                  />
-                  A third item</span
-                >
-                <span class="badge text-bg-secondary"> 2022/09/15</span>
-
-                <span class="btn btn-danger text-light">X</span>
-              </li>
             </ul>
+            <small
+              id="num-of-passive"
+              class="d-flex text-light fs-5 justify-content-end mt-2"
+              >Completed todos : 1</small
+            >
           </div>
         </div>
       </section>
@@ -188,6 +132,8 @@
       integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="app.js"></script>
   </body>
 </html>
