@@ -48,11 +48,13 @@ const TodoController = (function () {
         pColor = "info";
       }
 
-      if (data.todos.length > 0) {
-        id = data.todos[data.todos.length - 1].id + 1;
-      } else {
-        id = 0;
-      }
+      id = Date.now();
+
+      // if (data.todos.length > 0) {
+      //   id = data.todos[data.todos.length - 1].id + 1;
+      // } else {
+      //   id = 0;
+      // }
 
       const newTodo = new Todo(id, todoText, date, status, priority, pColor);
       //console.log(newTodo);
