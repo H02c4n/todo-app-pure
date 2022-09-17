@@ -36,42 +36,51 @@
                 type="text"
                 class="form-control"
                 placeholder="Create a new todo..."
-                aria-label="Recipient's username with two button addons"
               />
-              <input
+              <select class="form" name="options" id="priority">
+                <option selected disabled>priority</option>
+                <option class="bg-danger" value="high">High</option>
+                <option class="bg-warning" value="middle">Middle</option>
+                <option class="bg-info" value="low">Low</option>
+              </select>
+              <!-- <input
                 type="radio"
-                class="btn-check"
+                class="btn-check input-group-append"
                 name="options"
                 value="high"
                 id="high"
                 autocomplete="off"
               />
-              <label class="btn btn-outline-danger text-light" for="high"
+              <label class="btn opacity-50 btn-danger text-light" for="high"
                 >High</label
               >
               <input
                 type="radio"
-                class="btn-check"
+                class="btn-check input-group-append"
                 name="options"
                 value="middle"
                 id="middle"
                 autocomplete="off"
               />
-              <label class="btn btn-outline-warning text-light" for="middle"
+              <label class="btn opacity-50 btn-warning text-light" for="middle"
                 >Middle</label
               ><input
                 type="radio"
-                class="btn-check"
+                class="btn-check input-group-append"
                 name="options"
                 value="low"
                 id="low"
                 autocomplete="off"
               />
-              <label class="btn btn-outline-info text-light" for="low"
+              <label class="btn opacity-50 btn-info text-light" for="low"
                 >Low</label
-              >
+              > -->
 
-              <button id="add-btn" class="btn btn-success" type="button">
+              <button
+                id="add-btn"
+                class="btn border-0 btn-success"
+                type="button"
+              >
                 Add
               </button>
             </div>
@@ -103,14 +112,8 @@
               <li
                 class="list-group-item d-flex justify-content-between align-items-center fs-4"
               >
-                <span class="todo-text"
-                  ><input
-                    class="me-3"
-                    type="checkbox"
-                    checked
-                    name="done"
-                    id=""
-                  />
+                <span class="todo-text">
+                  <input class="me-3" type="checkbox" name="done" id="" />
                   A first item</span
                 >
                 <span class="badge text-bg-secondary"> 2022/09/15</span>

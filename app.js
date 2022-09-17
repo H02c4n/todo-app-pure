@@ -22,6 +22,10 @@ const TodoController = (function () {
       return data.todos;
     },
 
+    getTodosLength: function () {
+      console.log(data.todos.length);
+    },
+
     getData: function () {
       return data;
     },
@@ -59,10 +63,10 @@ const TodoController = (function () {
 
     deleteTodoFromArray: function (selectedData) {
       data.todos.forEach((todo, index) => {
-        console.log(todo.id);
-        console.log(selectedData);
-        if (selectedData.id == todo.id) {
-          console.log(data.todos.splice(index, 1));
+        //console.log(todo.id);
+        //console.log(selectedData);
+        if (selectedData == todo.id) {
+          data.todos.splice(index, 1);
         }
       });
     },
@@ -70,19 +74,21 @@ const TodoController = (function () {
 })();
 
 //? UI CONTROLLER
-const UIController = (function () {
+const UIController = (function (TodoCtrl) {
   const Selectors = {
     sectionWill: "#section-will",
     sectionDone: "#section-done",
     todoText: "#input-text",
     addBtn: "#add-btn",
     radioOpt: "input[name='options']",
+    selectOpt: "select[name='options']",
     todoListWill: "#todo-list-will",
     todoListDone: "#todo-list-done",
     numOfActive: "#num-of-active",
     numOfPassive: "#num-of-passive",
     deleteWill: "#delete-will",
     deleteDone: "#delete-done",
+    delBtns: ".delBtn",
   };
 
   return {
@@ -95,11 +101,11 @@ const UIController = (function () {
                 class="list-group-item d-flex justify-content-between align-items-center fs-4"
               >
                 <span class="todo-text"
-                  ><input class="me-3" type="checkbox"  name="done" id="" />${todo.todo} </span
+                  >${todo.todo} </span
                 >
                 <span>
                 <span  class="badge text-bg-${todo.pColor}"> ${todo.date}</span>
-                <button id="delete-will" data="${todo.id}" class="btn btn-danger ms-2 text-light">X</button>
+                <button id="delete-will" data-id="${todo.id}" class="delBtn btn btn-danger ms-2 text-light">X</button>
                 </span>
               </li>
       `;
@@ -119,11 +125,11 @@ const UIController = (function () {
                 class="list-group-item d-flex justify-content-between align-items-center fs-4"
               >
                 <span class="todo-text"
-                  ><input class="me-3" type="checkbox"  name="done" id="" />${todo.todo} </span
+                  >${todo.todo} </span
                 >
                 <span>
-                <span class="badge text-bg-${todo.pColor}"> ${todo.date}</span>
-                <button id="delete-will" data="${todo.id}" class="btn btn-danger ms-2 text-light">X</button>
+                  <span class="badge text-bg-${todo.pColor}"> ${todo.date}</span>
+                  <button id="delete-will" data-id="${todo.id}" class="delBtn btn btn-danger ms-2 text-light">X</button>
                 </span>
               </li>
       `;
@@ -132,9 +138,13 @@ const UIController = (function () {
     },
 
     updateNumOfTodos: function (todos) {
-      document.querySelector(
-        Selectors.numOfActive
-      ).textContent = `Available todos :  ${todos.length}`;
+      if (todos.length == 0) {
+        this.hideList();
+      } else {
+        document.querySelector(
+          Selectors.numOfActive
+        ).textContent = `Available todos :  ${todos.length}`;
+      }
     },
 
     clearInputs: function () {
@@ -143,8 +153,17 @@ const UIController = (function () {
     hideList: function () {
       document.querySelector(Selectors.sectionWill).style.display = "none";
     },
+
+    deleteTodoFromDom: function (e) {
+      if (e.target.className === "delBtn btn btn-danger ms-2 text-light") {
+        document
+          .querySelector(Selectors.deleteWill)
+          .parentElement.parentElement.remove();
+      }
+    },
   };
-})();
+})(TodoController);
+
 //? APP CONTROLLER
 const App = (function (TodoCtrl, UICtrl) {
   const UISelector = UICtrl.getSelectors();
@@ -157,20 +176,28 @@ const App = (function (TodoCtrl, UICtrl) {
     document
       .querySelector(UISelector.addBtn)
       .addEventListener("click", todoAdd);
+    document
+      .querySelector(UISelector.todoListWill)
+      .addEventListener("click", deleteTodo);
   };
 
   const todos = TodoCtrl.getTodos();
 
   const todoAdd = function (e) {
     const todoText = document.querySelector(UISelector.todoText).value;
-    const priorities = document.querySelectorAll(UISelector.radioOpt);
+    //const priorities = document.querySelectorAll(UISelector.radioOpt);
+    const prioritySelected = document.querySelector(UISelector.selectOpt).value;
+    console.log(prioritySelected);
 
     let selectedPriority;
-    priorities.forEach((p) => {
-      if (p.checked == true) {
-        selectedPriority = p.value;
-      }
-    });
+
+    selectedPriority = prioritySelected;
+
+    // priorities.forEach((p) => {
+    //   if (p.checked == true) {
+    //     selectedPriority = p.value;
+    //   }
+    // });
 
     if (
       todoText !== "" &&
@@ -187,20 +214,25 @@ const App = (function (TodoCtrl, UICtrl) {
       /// update
       UICtrl.updateNumOfTodos(todos);
 
-      // deleete todo
-
-      if (todos.length > 0) {
-        console.log(todos.length);
-        document
-          .querySelector(UISelector.deleteWill)
-          .addEventListener("click", function (e) {
-            console.log(e.target);
-          });
-      }
-
       //clear input
       UICtrl.clearInputs();
     }
+
+    e.preventDefault();
+  };
+
+  /// Delete todo
+  const deleteTodo = function (e) {
+    const selectedData = e.target.dataset.id;
+
+    // delete from array
+    TodoCtrl.deleteTodoFromArray(selectedData);
+
+    //delete from Dom
+
+    UICtrl.deleteTodoFromDom(e);
+
+    UICtrl.updateNumOfTodos(todos);
 
     e.preventDefault();
   };
