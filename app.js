@@ -41,20 +41,14 @@ const TodoController = (function () {
       let pColor;
 
       if (priority === "high") {
-        pColor = "danger";
+        pColor = "angles-up";
       } else if (priority === "middle") {
-        pColor = "warning";
+        pColor = "equals";
       } else {
-        pColor = "info";
+        pColor = "angles-down";
       }
 
       id = Date.now();
-
-      // if (data.todos.length > 0) {
-      //   id = data.todos[data.todos.length - 1].id + 1;
-      // } else {
-      //   id = 0;
-      // }
 
       const newTodo = new Todo(id, todoText, date, status, priority, pColor);
       //console.log(newTodo);
@@ -64,13 +58,7 @@ const TodoController = (function () {
     },
 
     deleteTodoFromArray: function (selectedData) {
-      data.todos.forEach((todo, index) => {
-        //console.log(todo.id);
-        //console.log(selectedData);
-        if (selectedData == todo.id) {
-          data.todos.splice(index, 1);
-        }
-      });
+      data.todos = data.todos.filter((todo) => todo.id != selectedData);
     },
   };
 })();
@@ -82,7 +70,6 @@ const UIController = (function (TodoCtrl) {
     sectionDone: "#section-done",
     todoText: "#input-text",
     addBtn: "#add-btn",
-    radioOpt: "input[name='options']",
     selectOpt: "select[name='options']",
     todoListWill: "#todo-list-will",
     todoListDone: "#todo-list-done",
@@ -103,10 +90,10 @@ const UIController = (function (TodoCtrl) {
                 class="list-group-item d-flex justify-content-between align-items-center fs-4"
               >
                 <span class="todo-text"
-                  >${todo.todo} </span
+                  >${todo.todo} <i class="fa-solid fa-${todo.pColor} ms-2"></i></span
                 >
                 <span>
-                <span  class="badge text-bg-${todo.pColor}"> ${todo.date}</span>
+                <span  class="badge"> ${todo.date}</span>
                 <button id="delete-will" data-id="${todo.id}" class="delBtn btn btn-danger ms-2 text-light">X</button>
                 </span>
               </li>
@@ -127,16 +114,17 @@ const UIController = (function (TodoCtrl) {
                 class="list-group-item d-flex justify-content-between align-items-center fs-4"
               >
                 <span class="todo-text"
-                  >${todo.todo} </span
+                  >${todo.todo} <i class="fa-solid fa-${todo.pColor} ms-2"></i></span
                 >
                 <span>
-                  <span class="badge text-bg-${todo.pColor}"> ${todo.date}</span>
+                  <span class="badge text-info"> ${todo.date}</span>
                   <button id="delete-will" data-id="${todo.id}" class="delBtn btn btn-danger ms-2 text-light">X</button>
                 </span>
               </li>
       `;
 
       document.querySelector(Selectors.todoListWill).innerHTML += item;
+      document.querySelector(Selectors.todoText).focus();
     },
 
     updateNumOfTodos: function (todos) {
@@ -157,10 +145,8 @@ const UIController = (function (TodoCtrl) {
     },
 
     deleteTodoFromDom: function (e) {
-      if (e.target.className === "delBtn btn btn-danger ms-2 text-light") {
-        document
-          .querySelector(Selectors.deleteWill)
-          .parentElement.parentElement.remove();
+      if (e.target.classList.contains("btn-danger")) {
+        e.target.parentElement.parentElement.remove();
       }
     },
   };
@@ -187,19 +173,11 @@ const App = (function (TodoCtrl, UICtrl) {
 
   const todoAdd = function (e) {
     const todoText = document.querySelector(UISelector.todoText).value;
-    //const priorities = document.querySelectorAll(UISelector.radioOpt);
     const prioritySelected = document.querySelector(UISelector.selectOpt).value;
-    console.log(prioritySelected);
 
     let selectedPriority;
 
     selectedPriority = prioritySelected;
-
-    // priorities.forEach((p) => {
-    //   if (p.checked == true) {
-    //     selectedPriority = p.value;
-    //   }
-    // });
 
     if (
       todoText !== "" &&
@@ -212,6 +190,8 @@ const App = (function (TodoCtrl, UICtrl) {
 
       /// add todo to list DOM
       UICtrl.addTodoToDom(newTodo);
+
+      const todos = TodoCtrl.getTodos();
 
       /// update
       UICtrl.updateNumOfTodos(todos);
@@ -234,6 +214,8 @@ const App = (function (TodoCtrl, UICtrl) {
 
     UICtrl.deleteTodoFromDom(e);
 
+    const todos = TodoCtrl.getTodos();
+
     UICtrl.updateNumOfTodos(todos);
 
     e.preventDefault();
@@ -244,7 +226,7 @@ const App = (function (TodoCtrl, UICtrl) {
       console.log("starting app....");
       const todos = TodoCtrl.getTodos();
 
-      if (todos.length == 0) {
+      if (todos.length < 1) {
         UICtrl.hideList();
       } else {
         UICtrl.createTodoList(todos);

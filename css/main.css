@@ -20,3 +20,12 @@ label.text-light {
 
 #priority option {
   border-color: #EC7272 !important; }
+
+.fa-equals {
+  color: orange; }
+
+.fa-angles-up {
+  color: red; }
+
+.fa-angles-down {
+  color: lightblue; }
